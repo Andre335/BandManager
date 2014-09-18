@@ -66,11 +66,11 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public Banda pesquisaBanda(Banda banda) {
+	public Banda pesquisaBanda(Banda banda) throws Exception {
 		for (Banda bandaDoUsuario : bandas) {
 			if (banda.equals(bandaDoUsuario))
 				return banda;
-		} return null;
+		} throw new Exception("Banda nao encontrada!");
 	}
 
 	public Banda getBandaFavorita() throws Exception {
@@ -151,5 +151,11 @@ public class Usuario {
 		
 		return "Nome: " + this.getNome() + "\nEmail: " + this.getEmail() 
 				+ "\nBandas: " + bandasS + "\nBanda Favorita: " + bandaFavS;
+	}
+
+	public boolean removeBanda(Banda banda) throws Exception {
+		if (pesquisaBanda(banda) != null)
+			bandas.remove(banda);
+		return true;
 	}
 }

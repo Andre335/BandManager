@@ -145,6 +145,25 @@ public class TestaUsuario {
 	}
 	
 	@Test
+	public void testaRemoveBandaExistente() throws Exception {
+		usuario.addBanda(banda1);
+		assertEquals(1, usuario.getBandas().size());
+		
+		usuario.removeBanda(banda1);
+		assertEquals(0, usuario.getBandas().size());
+	}
+	
+	@Test
+	public void testaRomoveBandaNaoExistente() {
+		try {
+			usuario.removeBanda(banda1);
+			fail("Esperava excecao!");
+		} catch (Exception e) {
+			assertEquals("Banda nao encontrada!", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void testaGetBandas() {
 		usuario.addBanda(banda1);
 		usuario.addBanda(banda2);
@@ -153,12 +172,20 @@ public class TestaUsuario {
 	}
 	
 	@Test
-	public void testaPesquisaBanda() {
-		usuario.addBanda(banda1);
-		assertEquals(null, usuario.pesquisaBanda(banda2));
-		
+	public void testaPesquisaBandaExistente() throws Exception {
 		usuario.addBanda(banda2);
 		assertEquals(banda2, usuario.pesquisaBanda(banda2));
+	}
+	
+	@Test
+	public void testaPesquisaBandaInexistente() {
+		usuario.addBanda(banda2);
+		try {
+			usuario.pesquisaBanda(banda1);
+			fail("Esperava excecao!");
+		} catch (Exception e) {
+			assertEquals("Banda nao encontrada!", e.getMessage());
+		}
 	}
 	
 	@Test
