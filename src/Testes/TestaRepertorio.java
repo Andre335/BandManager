@@ -15,7 +15,7 @@ public class TestaRepertorio {
 	private Musica musica2;
 
 	@Before
-	public void test() throws Exception {
+	public void iniciaRepertorio() throws Exception {
 		musica1 = new Musica("Someday", "Strokes");
 		musica2 = new Musica("Last Nite", "Strokes");
 		repertorio1 = new Repertorio("Show1"); 
