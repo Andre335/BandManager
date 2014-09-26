@@ -1,7 +1,10 @@
 package Fonte;
 
-public class Musica {
+import java.io.Serializable;
 
+public class Musica implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String autor;
 

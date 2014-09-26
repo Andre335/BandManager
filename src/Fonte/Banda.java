@@ -1,10 +1,12 @@
 package Fonte;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Banda {
+public class Banda implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private List<Repertorio> repertorios;
 	private Repertorio repertorioFavorito;
