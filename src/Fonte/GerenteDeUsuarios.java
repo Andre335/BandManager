@@ -19,10 +19,7 @@ public class GerenteDeUsuarios {
 		arquivo = new ArquivoDeDados<List<Usuario>>("usuarios.txt");
 	}
 	
-	public void addUsuario(Usuario usuario) throws Exception {
-		if (usuario == null)
-			throw new Exception("Usuario nao pode ser adicionado!");
-		
+	public void addUsuario(Usuario usuario) {
 		usuarios.add(usuario);
 	}
 

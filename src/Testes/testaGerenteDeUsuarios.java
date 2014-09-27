@@ -32,16 +32,6 @@ public class testaGerenteDeUsuarios {
 	}
 	
 	@Test
-	public void testaAddUsuarioInvalido() throws Exception {
-		try {
-			gerente.addUsuario(null);
-			fail("Esperava excecao!");
-		} catch (Exception e) {
-			assertEquals("Usuario nao pode ser adicionado!", e.getMessage());
-		}
-	}
-	
-	@Test
 	public void testaDeletaUsuarioExistente() throws Exception {
 		gerente.addUsuario(usuario);
 		assertEquals(1, gerente.getUsuarios().size());
