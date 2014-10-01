@@ -155,9 +155,8 @@ public class Usuario implements Serializable {
 				+ "\nBandas: " + bandasS + "\nBanda Favorita: " + bandaFavS;
 	}
 
-	public boolean removeBanda(Banda banda) throws Exception {
+	public void removeBanda(Banda banda) throws Exception {
 		if (pesquisaBanda(banda) != null)
 			bandas.remove(banda);
-		return true;
 	}
 }

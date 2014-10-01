@@ -154,7 +154,7 @@ public class TestaUsuario {
 	}
 	
 	@Test
-	public void testaRomoveBandaNaoExistente() {
+	public void testaRomoveBandaInexistente() {
 		try {
 			usuario.removeBanda(banda1);
 			fail("Esperava excecao!");
