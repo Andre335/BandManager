@@ -1,8 +1,12 @@
 package Fonte;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
+
+import auxiliar.Criptografia;
 
 public class Usuario implements Serializable {
 
@@ -158,5 +162,12 @@ public class Usuario implements Serializable {
 	public void removeBanda(Banda banda) throws Exception {
 		if (pesquisaBanda(banda) != null)
 			bandas.remove(banda);
+	}
+	
+	public boolean checaLogin(String senhaParaChecar)
+			throws GeneralSecurityException, IOException {
+		if (senhaParaChecar.equals(Criptografia.decrypt(senha)))
+			return true;
+		return false;
 	}
 }
