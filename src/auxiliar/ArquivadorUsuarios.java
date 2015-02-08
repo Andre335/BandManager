@@ -33,7 +33,7 @@ public class ArquivadorUsuarios {
 	 */
 	public ArquivadorUsuarios(String nomeDoArquivo) throws BandManagerException {
 		if (nomeDoArquivo == null || nomeDoArquivo.trim().isEmpty()) {
-			throw new BandManagerException("Nome do arquivo inválido.");
+			throw new BandManagerException("Nome do arquivo invalido.");
 		}
 
 		this.nomeDoArquivo = nomeDoArquivo;
@@ -51,7 +51,7 @@ public class ArquivadorUsuarios {
 			throws BandManagerException {
 		if (listaDeUsuarios.isEmpty()) {
 			throw new BandManagerException(
-					"Lista de usuários para escrever está vazia.");
+					"Lista de usuarios para escrever esta vazia.");
 		}
 
 		try {

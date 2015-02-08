@@ -6,8 +6,6 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
-import auxiliar.Criptografia;
-
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -166,8 +164,13 @@ public class Usuario implements Serializable {
 	
 	public boolean checaLogin(String senhaParaChecar)
 			throws GeneralSecurityException, IOException {
-		if (senhaParaChecar.equals(Criptografia.decrypt(senha)))
+//		if (senhaParaChecar.equals(Criptografia.decrypt(senha)))
+		if (senhaParaChecar.equals(senha))
 			return true;
 		return false;
+	}
+	
+	public String getSenha() {
+		return senha;
 	}
 }
