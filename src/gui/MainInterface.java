@@ -1,0 +1,31 @@
+package gui;
+
+import controllers.ControllerTelaLogin;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class MainInterface extends Application {
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+				"../gui/TelaLogin.fxml"));
+		Parent root = (Parent) fxmlLoader.load();
+		ControllerTelaLogin controller = fxmlLoader
+				.<ControllerTelaLogin> getController();
+		primaryStage.setTitle("BandManager");
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setResizable(false);
+		primaryStage.sizeToScene();
+		primaryStage.show();
+		controller.setStage(primaryStage);
+	}
+
+}
