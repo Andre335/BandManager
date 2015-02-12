@@ -32,9 +32,9 @@ public class ControllerTelaLogin {
 	
 	private final EventHandler<ActionEvent> eventos = (EventHandler<ActionEvent>) new Eventos();
 	private final GerenteDeUsuarios gerente = new GerenteDeUsuarios();
-	private Usuario usuarioAtivo;
 	private Stage stage;
 	private Dialog dialog;
+	private Usuario usuarioAtivo;
 	
 	@FXML
 	private TextField tfLogin;
@@ -82,14 +82,21 @@ public class ControllerTelaLogin {
 			} 
 			
 			else if (evento.getSource() == btEntrar) {
-				Usuario userLogar = gerente.pesquisaUsuario(tfLogin.getText().toString());
-				if (userLogar != null && pfSenha.getText().toString().equals(userLogar.getSenha())) {
+				Usuario userLogar = gerente.pesquisaUsuario(tfLogin.getText());
+				if (userLogar != null && pfSenha.getText().equals(userLogar.getSenha())) {
 					try {
-						gerente.login(userLogar.getNome(), userLogar.getSenha());
-						content.getChildren().setAll(FXMLLoader.load(getClass()
-								.getResource("../gui/TelaPrincipal.fxml")));
+						usuarioAtivo = gerente.login(userLogar.getEmail(), userLogar.getSenha());
+						FXMLLoader fxmlLoader = new FXMLLoader(getClass()
+								.getResource(
+										"../gui/TelaPrincipal.fxml"));
+						Parent root = (Parent) fxmlLoader.load();
+						ControllerTelaPrincipal controller = fxmlLoader
+								.<ControllerTelaPrincipal> getController();
+						controller.initialize(usuarioAtivo);
+						content.getChildren().setAll(root);
 					} catch (BandManagerException | GeneralSecurityException
 							| IOException e) {
+						e.printStackTrace();
 						dialog.setContent(e.getMessage());
 						dialog.show();
 					}

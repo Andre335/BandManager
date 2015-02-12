@@ -65,14 +65,13 @@ public class GerenteDeUsuarios {
 	 *             Lança exceção se houver problemas com a criptografia da
 	 *             senha.
 	 */
-	public void adicionaUsuario(String nome, String email, String senha)
+	public void adicionaUsuario(Usuario novoUser)
 			throws BandManagerException, UnsupportedEncodingException,
 			GeneralSecurityException, Exception {
 
-		usuarioValido(nome, email, senha);
+		usuarioValido(novoUser.getNome(), novoUser.getEmail(), novoUser.getSenha());
 
-		Usuario novoUsuario = new Usuario(nome, email, senha);
-		usuariosDoSistema.add(novoUsuario);
+		usuariosDoSistema.add(novoUser);
 
 		arquivador.escreveUsuarios(usuariosDoSistema);
 	}
@@ -120,7 +119,7 @@ public class GerenteDeUsuarios {
 
 		if (!usuario.checaLogin(senha))
 			throw new BandManagerException("Senha incorreta!");
-
+		
 		return usuario;
 	}
 
@@ -219,5 +218,9 @@ public class GerenteDeUsuarios {
 		if (senha == null || senha.trim().isEmpty())
 			return false;
 		return true;
+	}
+
+	public Usuario getUserLogado() {
+		return null;
 	}
 }

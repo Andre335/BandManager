@@ -6,6 +6,8 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
+import excecao.BandManagerException;
+
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -15,7 +17,7 @@ public class Usuario implements Serializable {
 	private List<Banda> bandas;
 	private Banda bandaFavorita;
 
-	public Usuario(String nome, String email, String senha) throws Exception {
+	public Usuario(String nome, String email, String senha) throws BandManagerException {
 		validaNome(nome);
 		validaEmail(email);
 		validaSenha(senha);
@@ -27,21 +29,21 @@ public class Usuario implements Serializable {
 		bandaFavorita = null;
 	}
 
-	private void validaSenha(String senha) throws Exception {
+	private void validaSenha(String senha) throws BandManagerException {
 		if (senha == null || senha.equals(""))
-			throw new Exception("Digite uma senha!");
+			throw new BandManagerException("Digite uma senha!");
 		if (senha.length() < 4 || senha.length() > 10)
-			throw new Exception("Senha deve ter entre 4 e 10 caracteres!");
+			throw new BandManagerException("Senha deve ter entre 4 e 10 caracteres!");
 	}
 
-	private void validaEmail(String email) throws Exception {
+	private void validaEmail(String email) throws BandManagerException {
 		if (email == null || email.equals(""))
-			throw new Exception("Digite seu email!");
+			throw new BandManagerException("Digite seu email!");
 	}
 
-	private void validaNome(String nome) throws Exception {
+	private void validaNome(String nome) throws BandManagerException {
 		if (nome == null || nome.equals(""))
-			throw new Exception("Digite seu nome!");
+			throw new BandManagerException("Digite seu nome!");
 	}
 
 	public String getNome() {
@@ -60,33 +62,35 @@ public class Usuario implements Serializable {
 		bandas.add(banda);
 	}
 
-	public void setNome(String nome) throws Exception {
+	public void setNome(String nome) throws BandManagerException {
 		validaNome(nome);
 		this.nome = nome;
 	}
 
-	public void setEmail(String email) throws Exception {
+	public void setEmail(String email) throws BandManagerException {
 		validaEmail(email);
 		this.email = email;
 	}
 
-	public Banda pesquisaBanda(Banda banda) throws Exception {
-		for (Banda bandaDoUsuario : bandas) {
-			if (banda.equals(bandaDoUsuario))
-				return banda;
-		} throw new Exception("Banda nao encontrada!");
+	public Banda pesquisaBanda(String nome) throws BandManagerException {
+		if (bandas != null) {
+			for (Banda bandaDoUsuario : bandas) {
+				if (nome.equals(bandaDoUsuario.getNome()))
+					return bandaDoUsuario;
+			} 
+		} throw new BandManagerException("Banda nao encontrada!");
 	}
 
-	public Banda getBandaFavorita() throws Exception {
+	public Banda getBandaFavorita() throws BandManagerException {
 		if (bandaFavorita == null)
-			throw new Exception("Voce ainda nao escolheu uma banda preferida!");
+			throw new BandManagerException("Voce ainda nao escolheu uma banda preferida!");
 		
 		return bandaFavorita;
 	}
 
-	public void setBandaFavorita(Banda banda) throws Exception {
+	public void setBandaFavorita(Banda banda) throws BandManagerException {
 		if (banda == null)
-			throw new Exception("Escolha uma banda!");
+			throw new BandManagerException("Escolha uma banda!");
 		
 		this.bandaFavorita = banda;
 	}
@@ -157,8 +161,8 @@ public class Usuario implements Serializable {
 				+ "\nBandas: " + bandasS + "\nBanda Favorita: " + bandaFavS;
 	}
 
-	public void removeBanda(Banda banda) throws Exception {
-		if (pesquisaBanda(banda) != null)
+	public void removeBanda(Banda banda) throws BandManagerException {
+		if (pesquisaBanda(banda.getNome()) != null)
 			bandas.remove(banda);
 	}
 	

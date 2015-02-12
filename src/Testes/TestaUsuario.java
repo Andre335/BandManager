@@ -174,14 +174,14 @@ public class TestaUsuario {
 	@Test
 	public void testaPesquisaBandaExistente() throws Exception {
 		usuario.addBanda(banda2);
-		assertEquals(banda2, usuario.pesquisaBanda(banda2));
+		assertEquals(banda2, usuario.pesquisaBanda(banda2.getNome()));
 	}
 	
 	@Test
 	public void testaPesquisaBandaInexistente() {
 		usuario.addBanda(banda2);
 		try {
-			usuario.pesquisaBanda(banda1);
+			usuario.pesquisaBanda(banda1.getNome());
 			fail("Esperava excecao!");
 		} catch (Exception e) {
 			assertEquals("Banda nao encontrada!", e.getMessage());
